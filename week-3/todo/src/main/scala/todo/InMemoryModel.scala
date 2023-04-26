@@ -41,9 +41,7 @@ object InMemoryModel extends Model:
     idStore.get(id)
 
   def complete(id: Id): Option[Task] =
-      idStore.get(id) match
-        case Some(task) => update(id)(t => t.complete)
-        case _ => None
+    update(id)(t => t.complete)
 
   def update(id: Id)(f: Task => Task): Option[Task] =
     idStore.updateWith(id)(opt => opt.map(f))
